@@ -1,66 +1,83 @@
-# 🫀 Heart Attack Risk Detection from ECG Images (CNN–LSTM)
+# 🫀 Cardiac Risk Signal Detection from ECG Images (CNN–LSTM)
 
-> **Undergraduate Project**  
-> **Purpose:** Proof-of-concept exploration of deep learning for cardiac risk estimation from ECG images  
-> **Not intended for clinical or diagnostic use**
+> **Academic Project (Undergraduate Capstone)**  
+> **Purpose:** Proof-of-concept exploration of AI-driven signal extraction and risk stratification from visual time-series data  
+> **Not intended for clinical, diagnostic, or medical use**
 
 ---
 
 ## 📌 Project Overview
 
-This project explores the feasibility of using deep learning to **estimate heart-attack (myocardial infarction) risk from ECG images**. A hybrid **CNN–LSTM** architecture is used to learn:
+This project explores the feasibility of using deep learning to **extract risk-related signals from ECG images** and produce a **coarse-grained risk score**. A hybrid **CNN–LSTM** architecture is used to learn:
 
-- **Spatial ECG morphology** (via Convolutional Neural Networks)
-- **Sequential cardiac patterns** (via Long Short-Term Memory networks)
+- **Spatial patterns** from rendered signal images (via Convolutional Neural Networks)
+- **Sequential dependencies** across the signal timeline (via Long Short-Term Memory networks)
 
-The model outputs a **risk probability**, indicating whether an ECG image is more likely to belong to a **higher-risk (“risky”)** or **lower-risk (“normal”)** category.
+The model outputs a **probabilistic risk score**, indicating whether an input belongs to a **higher-risk** or **lower-risk** category.
 
-This work was completed as an **undergraduate engineering project**, with emphasis on:
-- End-to-end ML pipeline design
-- Representation learning from medical signals
-- Correct framing of limitations and safe use
-
----
-
-## 🎯 Problem Statement
-
-Early identification of high-risk cardiac patterns in ECGs can support triage and further clinical evaluation. While many approaches operate directly on raw ECG waveforms, this project investigates an alternative:
-
-> **Can ECG images alone contain enough information to enable coarse risk stratification using deep learning?**
-
-This scenario reflects practical settings where:
-- Only printed or rendered ECG images are available
-- Raw waveform data is inaccessible
-- Rapid screening is required
+While the domain context is ECG data, the project is intentionally framed as a **generalizable AI pipeline for signal detection and prioritization**, applicable to any scenario involving:
+- Image-based time-series representations
+- Large volumes of signals requiring triage
+- Human-in-the-loop review and decision support
 
 ---
 
-## 🧠 Model Architecture
+## 🎯 Problem Framing (Generalized)
 
-The system uses a **CNN–LSTM hybrid model**:
+Many real-world systems rely on **rendered or visual representations of signals** rather than raw sensor data. Examples include:
+- Exported charts or screenshots
+- Legacy systems without waveform access
+- Monitoring tools that surface images rather than structured data
+
+This project explores the question:
+
+> **Can visual signal representations alone contain enough information to enable coarse risk stratification and prioritization using deep learning?**
+
+The goal is not precise prediction, but **early filtering and prioritization**, reducing the burden on downstream human or automated workflows.
+
+---
+
+## 🧠 System Architecture
+
+The system uses a **CNN–LSTM hybrid architecture**, chosen to balance interpretability, feasibility, and extensibility.
 
 ### 1. Convolutional Neural Network (CNN)
-- Extracts spatial features from ECG images
-- Learns waveform morphology such as:
-  - ST-segment deviations
-  - QRS complex shapes
+- Extracts spatial features from signal images
+- Learns local morphology such as:
+  - Shape deviations
   - Relative peak positions
+  - Structural irregularities
 
-### 2. LSTM (Bidirectional)
-- Treats CNN feature maps as a temporal sequence
-- Captures sequential dependencies across the ECG signal
+### 2. Sequence Modeling Layer (Bidirectional LSTM)
+- Treats CNN feature maps as an ordered sequence
+- Captures temporal dependencies across the signal timeline
 
 ### 3. Output Layer
-- Single sigmoid-activated logit
-- Produces a **risk probability** between 0 and 1
+- Sigmoid-activated output
+- Produces a **risk likelihood score** in the range [0, 1]
 
-> This architecture was chosen to reflect both **local ECG structure** and **temporal cardiac dynamics**.
+This architecture reflects a common **AI design pattern** for combining local feature extraction with temporal context.
+
+---
+
+## 🧩 Product-Oriented Use Cases
+
+Although demonstrated on ECG images, this approach generalizes to multiple product and platform scenarios:
+
+- Automated triage of high-risk or anomalous signals
+- Prioritization of events for analyst or operator review
+- Reducing review volume while preserving signal quality
+- Feeding downstream dashboards, alerts, or workflow automation
+- Supporting decision-making under time or data constraints
+
+The model is best viewed as a **decision-support component**, not a fully autonomous system.
 
 ---
 
 ## 📂 Dataset Structure
 
-The project assumes a **folder-based dataset layout**:
+The project assumes a simple **folder-based dataset layout**:
+
 
 
 ECG_ROOT/
@@ -139,9 +156,9 @@ As such, the model **must not be used for medical decision-making**.
 ## 🔬 Ethical Considerations
 
 - This project is strictly for **educational and research exploration**
-- Outputs represent **risk likelihood**, not diagnoses
-- Misuse in clinical settings could result in harm
-- Future medical AI systems must comply with regulatory and ethical standards
+- Outputs represent **relative risk likelihood**, not diagnoses
+- Not suitable for safety-critical or regulated deployment
+- Responsible AI systems must include governance, monitoring, and human oversight
 
 ---
 
@@ -150,9 +167,9 @@ As such, the model **must not be used for medical decision-making**.
 If revisiting this work today, key improvements would include:
 - Training directly on raw ECG waveforms (1D CNNs or transformers)
 - Patient-level data splits to avoid data leakage
-- Calibration and uncertainty estimation
-- Explainability aligned with clinical interpretation
-- External dataset validation
+- Uncertainty estimation and confidence calibration
+- Explainability aligned with domain interpretation
+- Evaluation on larger, more diverse datasets
 
 ---
 
@@ -170,5 +187,6 @@ This project aligns with existing literature on:
 - **Author:** Preetam Jena  
 - **Context:** Undergraduate engineering capstone project  
 - **Focus:** Machine learning, signal processing, and healthcare AI fundamentals
+
 
 
