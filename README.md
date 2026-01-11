@@ -1,6 +1,6 @@
 # 🫀 Heart Attack Risk Detection from ECG Images (CNN–LSTM)
 
-> **Academic / Undergraduate Project**  
+> **Undergraduate Project**  
 > **Purpose:** Proof-of-concept exploration of deep learning for cardiac risk estimation from ECG images  
 > **Not intended for clinical or diagnostic use**
 
@@ -170,4 +170,5 @@ This project aligns with existing literature on:
 - **Author:** Preetam Jena  
 - **Context:** Undergraduate engineering capstone project  
 - **Focus:** Machine learning, signal processing, and healthcare AI fundamentals
+
 
