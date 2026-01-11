@@ -62,16 +62,24 @@ The system uses a **CNN–LSTM hybrid model**:
 
 The project assumes a **folder-based dataset layout**:
 
-ECG_ROOT/
-├── normal/
-│ ├── ecg_001.png
-│ ├── ecg_002.png
-│ └── ...
-└── risky/
-├── ecg_101.png
-├── ecg_102.png
-└── ...
 
+ECG_ROOT/
+
+normal/
+
+ecg_001.png
+
+ecg_002.png
+
+…
+
+risky/
+
+ecg_101.png
+
+ecg_102.png
+
+…
 
 ### Label Semantics
 
@@ -162,3 +170,4 @@ This project aligns with existing literature on:
 - **Author:** Preetam Jena  
 - **Context:** Undergraduate engineering capstone project  
 - **Focus:** Machine learning, signal processing, and healthcare AI fundamentals
+
